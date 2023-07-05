@@ -297,4 +297,6 @@ def get_all_i_features(total_frames, video_name, suffix, project_path):
       all_i_features[frame, 0:num_features] = get_i_features(frame, \
                                                           m1_feature_pts, m2_feature_pts, \
                                                           relevant_area, female_side_vec)
+      if video_name == "221002_PZ71_1" and frame%1000 == 0:
+        print(frame)
   return all_i_features
