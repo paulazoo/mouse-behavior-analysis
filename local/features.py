@@ -25,7 +25,7 @@ if __name__ == '__main__':
   #video_name = '221016_PZ70_1'
   suffix = 'DLC_resnet50_demoJul14shuffle1_50000_assemblies'
   #total_frames = 36000
-  total_frames = 36000
+  total_frames = 100
 
   # takes a while
   print('running...')
@@ -33,6 +33,7 @@ if __name__ == '__main__':
     
   todo_list = ["221002_PZ71_1", \
                 "221127_PZ89_1", \
+                "221009_PZ70_1", \
                 "221009_PZ71_1", \
                 "221016_PZ70_1", \
                 "221016_PZ71_1", \

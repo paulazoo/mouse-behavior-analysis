@@ -25,3 +25,4 @@ data = pickle.load(file)
 i_data = data[i]
 mouse1 = i_data[0]
 mouse2 = i_data[1]
+
