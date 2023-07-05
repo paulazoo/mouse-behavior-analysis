@@ -13,7 +13,6 @@ def get_data(individual, bodypart, h5_file):
   mouse_data = h5_file.xs(individual,level='individuals',axis=1)
   out_data = mouse_data.xs(bodypart,level='bodyparts',axis=1)
   out_data.columns = out_data.columns.droplevel("scorer")
-  out_data_copy = out_data.copy()
   output = out_data.copy()
   # if missing a lot of body parts:
   # for i in range(out_data_copy) go by every 5:
@@ -21,54 +20,38 @@ def get_data(individual, bodypart, h5_file):
   #  output[i:i+4] = x and y from max likelihood
   return output
 
-
-# get all data ready for accessing as needed later on
-
-# names of csv individuals
-individual1 = 'ind1'
-individual2 = 'ind2'
-#individual3 = 'ind3'
-
-def get_feature_points(h5_file, female_side_vec, male_side_vec):
-    # getting feature points
+def get_feature_points(h5_file):
+    # get all data ready for accessing as needed later on
+    # names of csv individuals
+    individual1 = 'ind1'
+    individual2 = 'ind2'
+    # getting mouse1 feature points
     mouse1_feature_points = {}
-    mouse1_feature_points['snout'] = get_data('ind1', 'snout', h5_file)
-    mouse1_feature_points['leftear'] = get_data('ind1', 'leftear', h5_file)
-    mouse1_feature_points['rightear'] = get_data('ind1', 'rightear', h5_file)
-    mouse1_feature_points['shoulder'] = get_data('ind1', 'shoulder', h5_file)
-    mouse1_feature_points['spine1'] = get_data('ind1', 'spine1', h5_file)
-    mouse1_feature_points['spine2'] = get_data('ind1', 'spine2', h5_file)
-    mouse1_feature_points['spine3'] = get_data('ind1', 'spine3', h5_file)
-    mouse1_feature_points['spine4'] = get_data('ind1', 'spine4', h5_file)
-    mouse1_feature_points['tailbase'] = get_data('ind1', 'tailbase', h5_file)
-
+    mouse1_feature_points['snout'] = get_data(individual1, 'snout', h5_file)
+    mouse1_feature_points['leftear'] = get_data(individual1, 'leftear', h5_file)
+    mouse1_feature_points['rightear'] = get_data(individual1, 'rightear', h5_file)
+    mouse1_feature_points['shoulder'] = get_data(individual1, 'shoulder', h5_file)
+    mouse1_feature_points['spine1'] = get_data(individual1, 'spine1', h5_file)
+    mouse1_feature_points['spine2'] = get_data(individual1, 'spine2', h5_file)
+    mouse1_feature_points['spine3'] = get_data(individual1, 'spine3', h5_file)
+    mouse1_feature_points['spine4'] = get_data(individual1, 'spine4', h5_file)
+    mouse1_feature_points['tailbase'] = get_data(individual1, 'tailbase', h5_file)
+    # getting mouse2 feature points
     mouse2_feature_points = {}
-    mouse2_feature_points['snout'] = get_data('ind2', 'snout', h5_file)
-    mouse2_feature_points['leftear'] = get_data('ind1', 'leftear', h5_file)
-    mouse2_feature_points['rightear'] = get_data('ind1', 'rightear', h5_file)
-    mouse2_feature_points['shoulder'] = get_data('ind2', 'shoulder', h5_file)
-    mouse2_feature_points['spine1'] = get_data('ind2', 'spine1', h5_file)
-    mouse2_feature_points['spine2'] = get_data('ind2', 'spine2', h5_file)
-    mouse2_feature_points['spine3'] = get_data('ind2', 'spine3', h5_file)
-    mouse2_feature_points['spine4'] = get_data('ind2', 'spine4', h5_file)
-    mouse2_feature_points['tailbase'] = get_data('ind2', 'tailbase', h5_file)
-
-    # commented out because ran with n_tracks = 2
-    #mouse3_feature_points = {}
-    #mouse3_feature_points['snout'] = get_data('mus3', 'snout', h5_file)
-    #mouse3_feature_points['shoulder'] = get_data('mus3', 'shoulder', h5_file)
-    #mouse3_feature_points['spine1'] = get_data('mus3', 'spine1', h5_file)
-    #mouse3_feature_points['spine2'] = get_data('mus3', 'spine2', h5_file)
-    #mouse3_feature_points['spine3'] = get_data('mus3', 'spine3', h5_file)
-    #mouse3_feature_points['spine4'] = get_data('mus3', 'spine4', h5_file)
-    #mouse3_feature_points['tailbase'] = get_data('mus3', 'tailbase', h5_file)
-
+    mouse2_feature_points['snout'] = get_data(individual2, 'snout', h5_file)
+    mouse2_feature_points['leftear'] = get_data(individual1, 'leftear', h5_file)
+    mouse2_feature_points['rightear'] = get_data(individual1, 'rightear', h5_file)
+    mouse2_feature_points['shoulder'] = get_data(individual2, 'shoulder', h5_file)
+    mouse2_feature_points['spine1'] = get_data(individual2, 'spine1', h5_file)
+    mouse2_feature_points['spine2'] = get_data(individual2, 'spine2', h5_file)
+    mouse2_feature_points['spine3'] = get_data(individual2, 'spine3', h5_file)
+    mouse2_feature_points['spine4'] = get_data(individual2, 'spine4', h5_file)
+    mouse2_feature_points['tailbase'] = get_data(individual2, 'tailbase', h5_file)
     # male_side_vec = [x, y, width, height]; female_side_vec = [x, y, width, height]
-    relevant_area = female_side_vec.copy()
-    # relevant area is female_side_vec + male_side_vec size exactly right next to each other with 50 buffer
-    relevant_area[2] = female_side_vec[2] + male_side_vec[2] + 50
+    relevant_area = [0, 0, 1000, 1000]
     return mouse1_feature_points, mouse2_feature_points, relevant_area
 
+# EUCLID STUFF HERE----------------------------------------------------------------
 def within_area(area_vector, input_coor):
   area_startx = area_vector[0]
   area_starty = area_vector[1]
@@ -113,6 +96,7 @@ def euclid_angle(pointa_coor, pointb_coor, pointc_coor):
 
   return output_ang
 
+# BODYPARTS IN AREAS HERE---------------------------------------------------------------
 def torso_in_area(area_vector, feature_points, i):
   # finds if any part of torso at all is in area
 
@@ -132,10 +116,23 @@ def torso_in_area(area_vector, feature_points, i):
     return 1
   else:
     return 0
-  
-def ear_or_torso_in_area(area_vector, feature_points, i):
+
+def midtorso_in_area(area_vector, feature_points, i):
   # finds if any part of torso at all is in area
 
+  if within_area(area_vector, feature_points['spine1'].loc[[i]]):
+    return 1
+  elif within_area(area_vector, feature_points['spine2'].loc[[i]]):
+    return 1
+  elif within_area(area_vector, feature_points['spine3'].loc[[i]]):
+    return 1
+  elif within_area(area_vector, feature_points['spine4'].loc[[i]]):
+    return 1
+  else:
+    return 0
+
+def ear_or_torso_in_area(area_vector, feature_points, i):
+  # finds if any part of torso or ear at all is in area
   if within_area(area_vector, feature_points['snout'].loc[[i]]):
     return 1
   elif within_area(area_vector, feature_points['shoulder'].loc[[i]]):
@@ -175,50 +172,34 @@ def shoulder_in_area(area_vector, feature_points, i):
     result = 0
   return result
 
-
+# CHECK MICE HERE---------------------------------------------------------------------
 def check_mice_exist(i, mouse1_feature_points, mouse2_feature_points, relevant_area):
   # 2 mice detected
   if ear_or_torso_in_area(relevant_area, mouse1_feature_points, i) and \
     ear_or_torso_in_area(relevant_area, mouse2_feature_points, i):
     first_mouse_feature_points = mouse1_feature_points
     second_mouse_feature_points = mouse2_feature_points
-
-  #elif torso_in_area(relevant_area,mouse1_feature_points, i) and torso_in_area(relevant_area, 3, i):
-    # first_mouse_feature_points = mouse1_feature_points
-    # second_mouse_feature_points = mouse3_feature_points
-
-  #elif torso_in_area(relevant_area, mouse2_feature_points, i) and torso_in_area(relevant_area, 3, i):
-  #  first_mouse_feature_points = mouse2_feature_points
-  #  second_mouse_feature_points = mouse3_feature_points
-
-
   # 1 mouse detected
   elif ear_or_torso_in_area(relevant_area, mouse1_feature_points, i):
     first_mouse_feature_points = mouse1_feature_points
     second_mouse_feature_points = 0
-
   elif ear_or_torso_in_area(relevant_area, mouse2_feature_points, i):
     first_mouse_feature_points = mouse2_feature_points
     second_mouse_feature_points = 0
-
-  #elif torso_in_area(relevant_area, 3, i):
-  #  first_mouse_feature_points = mouse3_feature_points
-  #  second_mouse_feature_points = 0
-
   # no mouse detected
   else:
     first_mouse_feature_points = 0
     second_mouse_feature_points = 0
-
   return first_mouse_feature_points, second_mouse_feature_points
 
 def check_female_side_mice(i, mouse1_feature_points, mouse2_feature_points, female_side_vec):
-  if ear_or_torso_in_area(female_side_vec, mouse1_feature_points, i) and \
-    ear_or_torso_in_area(female_side_vec, mouse2_feature_points, i):
+  if midtorso_in_area(female_side_vec, mouse1_feature_points, i) and \
+    midtorso_in_area(female_side_vec, mouse2_feature_points, i):
     return 1
   else:
     return 0
-  
+
+# REST OF FEATURES HERE-----------------------------------------------------------------------
 def get_torso_dists(i, first_mouse_feature_points, second_mouse_feature_points):
   dists = np.zeros((7,7))
 
@@ -226,7 +207,8 @@ def get_torso_dists(i, first_mouse_feature_points, second_mouse_feature_points):
 
   for bodypart_i in range(0, len(torso_bodyparts)):
     for bodypart_j in range(0, len(torso_bodyparts)):
-      dists[bodypart_i, bodypart_j] = euclid_dist(first_mouse_feature_points[torso_bodyparts[bodypart_i]].loc[[i]], second_mouse_feature_points[torso_bodyparts[bodypart_j]].loc[[i]])
+      dists[bodypart_i, bodypart_j] = euclid_dist(first_mouse_feature_points[torso_bodyparts[bodypart_i]].loc[[i]], \
+                                                  second_mouse_feature_points[torso_bodyparts[bodypart_j]].loc[[i]])
   return dists
 
 def long_short(i, first_mouse_feature_points, second_mouse_feature_points):
@@ -256,10 +238,10 @@ def long_short(i, first_mouse_feature_points, second_mouse_feature_points):
 
 def get_i_features(i, mouse1_feature_points, mouse2_feature_points, relevant_area, female_side_vec):
 
-  first_mouse_feature_points, second_mouse_feature_points = check_mice_exist(i, mouse1_feature_points, \
-                                                                             mouse2_feature_points, \
-                                                                                relevant_area)
+  first_mouse_feature_points, second_mouse_feature_points = check_mice_exist(i, mouse1_feature_points, mouse2_feature_points,relevant_area)
+  
   if second_mouse_feature_points == 0:
+    # num_features = 8
     return np.array([0, 0, 0,0,0,0, 0,0])
 
   else:
@@ -290,7 +272,9 @@ def get_i_features(i, mouse1_feature_points, mouse2_feature_points, relevant_are
     posterior_ang = euclid_angle(long_mouse_feature_points[long_anterior].loc[[i]], long_mouse_feature_points[long_posterior].loc[[i]], short_mouse_feature_points[short_posterior].loc[[i]])
     anterior_ang = euclid_angle(long_mouse_feature_points[long_posterior].loc[[i]], long_mouse_feature_points[long_anterior].loc[[i]], short_mouse_feature_points[short_anterior].loc[[i]])
 
-    return np.array([1, female_side_mice, min_dist,min_posteriority_diff,max_dist,max_posteriority_diff, posterior_ang, anterior_ang])
+    return np.array([1, female_side_mice, \
+                     min_dist,min_posteriority_diff,max_dist,max_posteriority_diff, \
+                      posterior_ang, anterior_ang])
 
 
 
@@ -304,9 +288,7 @@ def get_all_i_features(total_frames, video_name, h5_suffix, project_path):
   male_side_mat = scipy.io.loadmat(project_path + "\\behaviors\\" + video_name + "_male_side.mat")
   male_side_vec = male_side_mat['croprect'][0]
 
-  mouse1_feature_points, mouse2_feature_points, relevant_area = get_feature_points(h5_file, \
-                                                                                  female_side_vec, \
-                                                                                    male_side_vec)
+  mouse1_feature_points, mouse2_feature_points, relevant_area = get_feature_points(h5_file)
   
   # now go find features for each frame
   num_features = 8
