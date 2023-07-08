@@ -8,8 +8,6 @@ import random
 from pathlib import Path
 import glob
 
-do_videos = 0
-
 project_path = "D:\\paulazhu\\demo-me-2021-07-14\\"
 config_path = os.path.join(project_path, "config.yaml")
 
@@ -19,16 +17,6 @@ TRACK_METHOD = "ellipse"  # Could also be "box", but "ellipse" was found to be m
 from deeplabcut.utils.auxiliaryfunctions import edit_config
 SNAPSHOT = 4 # not the actual number, but its index within the folder starting from 0
 edit_config(config_path, {'snapshotindex': SNAPSHOT})
-
-
-if do_videos == 1:
-    for video in glob.glob(project_path + "videos\\" + "*.avi"):
-        deeplabcut.create_video_with_all_detections(
-            config_path,
-            [video],
-            videotype='avi',
-            shuffle=SHUFFLE,
-            )
 
 for video in [project_path + "videos\\221127_PZ90_1.avi"]:
 # for video in glob.glob(project_path + "videos\\" + "*.avi"):
