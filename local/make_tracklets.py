@@ -7,6 +7,23 @@ from deeplabcut.utils import auxfun_multianimal, auxiliaryfunctions
 import random
 from pathlib import Path
 import glob
+import sys
+# caution: path[0] is reserved for script path (or '' in REPL)
+sys.path.insert(1, 'D:\\mouse-behavior-analysis')
+
+'''
+DLC 2.3.5
+
+make sure use_shelve=False to avoid .pickle.db files
+
+need to copy over:
+- video folder analyzed pickles
+  - must go into video folder and select all and then download zip. Otherwise will miss files.
+  - will give multiple zips probably
+  - double check that you have the correct number of files downloaded
+- dlc models
+- config.yaml
+'''
 
 project_path = "D:\\paulazhu\\demo-me-2021-07-14\\"
 config_path = os.path.join(project_path, "config.yaml")
@@ -18,7 +35,12 @@ from deeplabcut.utils.auxiliaryfunctions import edit_config
 SNAPSHOT = 4 # not the actual number, but its index within the folder starting from 0
 edit_config(config_path, {'snapshotindex': SNAPSHOT})
 
-for video in [project_path + "videos\\221127_PZ90_1.avi"]:
+for video in [project_path + "videos\\221209_PZ87_1.avi",\
+              project_path + "videos\\221209_PZ88_1.avi",\
+              project_path + "videos\\221209_PZ89_1.avi",\
+              project_path + "videos\\221209_PZ90_1.avi",\
+              project_path + "videos\\221209_PZ70_1.avi",\
+              project_path + "videos\\221209_PZ71_1.avi"]:
 # for video in glob.glob(project_path + "videos\\" + "*.avi"):
   deeplabcut.convert_detections2tracklets(
       config_path,
@@ -31,7 +53,12 @@ for video in [project_path + "videos\\221127_PZ90_1.avi"]:
 
 
 # for video in glob.glob(project_path + "videos\\" + "*.avi"):
-for video in [project_path + "videos\\221127_PZ90_1.avi"]:
+for video in [project_path + "videos\\221209_PZ87_1.avi",\
+              project_path + "videos\\221209_PZ88_1.avi",\
+              project_path + "videos\\221209_PZ89_1.avi",\
+              project_path + "videos\\221209_PZ90_1.avi",\
+              project_path + "videos\\221209_PZ70_1.avi",\
+              project_path + "videos\\221209_PZ71_1.avi"]:
   deeplabcut.stitch_tracklets(
     config_path,
     [video],
