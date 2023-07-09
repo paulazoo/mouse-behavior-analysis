@@ -24,8 +24,8 @@ if __name__ == '__main__':
   project_path = "D:\\paulazhu\\demo-me-2021-07-14\\"
   #video_name = '221016_PZ70_1'
   suffix = 'DLC_resnet50_demoJul14shuffle1_50000_assemblies'
-  #total_frames = 36000
-  total_frames = 100
+  total_frames = 36000
+  #total_frames = 100
 
   # takes a while
   print('running...')

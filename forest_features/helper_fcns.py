@@ -114,7 +114,8 @@ def get_all_i_features(total_frames, video_name, suffix, project_path):
                                                           relevant_area, female_side_vec)
       #if video_name == "221002_PZ71_1" and frame%1000 == 0:
       #  print(frame)
-      if np.any(np.isnan(all_i_features)):
-        print(all_i_features)
+      if np.any(np.isnan(all_i_features[frame, 0:num_features])):
+        print('nans detected')
+        print(all_i_features[frame, 0:num_features])
 
   return all_i_features
