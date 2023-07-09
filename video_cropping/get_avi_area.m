@@ -15,6 +15,7 @@ imshow(im);
 title('Get Area');
 h = imrect(gca);
 croprect = wait(h);
+croprect(croprect < 0) = 0;
 close
 
 %% Display in command window

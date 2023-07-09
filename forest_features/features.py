@@ -24,37 +24,19 @@ if __name__ == '__main__':
   project_path = "D:\\paulazhu\\demo-me-2021-07-14\\"
   #video_name = '221016_PZ70_1'
   suffix = 'DLC_resnet50_demoJul14shuffle1_50000_assemblies'
-  total_frames = 36000
-  #total_frames = 1000
+  #total_frames = 36000
+  total_frames = 100
 
   # takes a while
   print('running...')
   t = time.time()
-    
-  todo_list = ["221002_PZ71_1", \
-                "221127_PZ89_1", \
-                "221009_PZ70_1", \
-                "221009_PZ71_1", \
-                "221016_PZ70_1", \
-                "221016_PZ71_1", \
-                "221024_PZ70_1", \
-                "221024_PZ71_1", \
-                "221106_PZ70_1", \
-                "221106_PZ71_1", \
-                "221113_PZ87_1", \
-                "221113_PZ89_1", \
-                "221113_PZ90_1", \
-                "221119_PZ70_1", \
-                "221119_PZ71_1", \
-                "221120_PZ87_1", \
-                "221120_PZ89_1", \
-                "221120_PZ90_1", \
-                "221127_PZ87_1", \
-                "221127_PZ90_1", \
-                "221127_PZ70_1", \
-                "221127_PZ71_1", \
-                "221009_PZ70_1", \
-                  ]
+
+  todo_list = ["221209_PZ70_1", \
+                "221209_PZ71_1", \
+                "221209_PZ87_1", \
+                "221209_PZ88_1", \
+                "221209_PZ89_1", \
+                "221209_PZ90_1"]
 
   process_list = []
   for todo in todo_list:

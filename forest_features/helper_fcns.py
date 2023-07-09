@@ -100,8 +100,8 @@ def get_all_i_features(total_frames, video_name, suffix, project_path):
   # area_vec = [area_startx, area_starty, area_distx, area_disty]
   female_side_mat = scipy.io.loadmat(project_path + "\\behaviors\\" + video_name + "_female_side.mat")
   female_side_vec = female_side_mat['croprect'][0]
-  male_side_mat = scipy.io.loadmat(project_path + "\\behaviors\\" + video_name + "_male_side.mat")
-  male_side_vec = male_side_mat['croprect'][0]
+  #male_side_mat = scipy.io.loadmat(project_path + "\\behaviors\\" + video_name + "_male_side.mat")
+  #male_side_vec = male_side_mat['croprect'][0]
 
   m1_feature_pts, m2_feature_pts, relevant_area = get_feature_pts(data)
   
