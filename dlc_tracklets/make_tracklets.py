@@ -28,6 +28,9 @@ need to copy over:
 project_path = "D:\\paulazhu\\demo-me-2021-07-14\\"
 config_path = os.path.join(project_path, "config.yaml")
 
+videos_list = [project_path + "videos\\221209_PZ74_2.avi",\
+              project_path + "videos\\221209_PZ74_3.avi"]
+
 SHUFFLE = 1
 TRACK_METHOD = "ellipse"  # Could also be "box", but "ellipse" was found to be more robust on this dataset.
 
@@ -35,12 +38,7 @@ from deeplabcut.utils.auxiliaryfunctions import edit_config
 SNAPSHOT = 4 # not the actual number, but its index within the folder starting from 0
 edit_config(config_path, {'snapshotindex': SNAPSHOT})
 
-for video in [project_path + "videos\\221209_PZ87_1.avi",\
-              project_path + "videos\\221209_PZ88_1.avi",\
-              project_path + "videos\\221209_PZ89_1.avi",\
-              project_path + "videos\\221209_PZ90_1.avi",\
-              project_path + "videos\\221209_PZ70_1.avi",\
-              project_path + "videos\\221209_PZ71_1.avi"]:
+for video in videos_list:
 # for video in glob.glob(project_path + "videos\\" + "*.avi"):
   deeplabcut.convert_detections2tracklets(
       config_path,
@@ -53,12 +51,7 @@ for video in [project_path + "videos\\221209_PZ87_1.avi",\
 
 
 # for video in glob.glob(project_path + "videos\\" + "*.avi"):
-for video in [project_path + "videos\\221209_PZ87_1.avi",\
-              project_path + "videos\\221209_PZ88_1.avi",\
-              project_path + "videos\\221209_PZ89_1.avi",\
-              project_path + "videos\\221209_PZ90_1.avi",\
-              project_path + "videos\\221209_PZ70_1.avi",\
-              project_path + "videos\\221209_PZ71_1.avi"]:
+for video in videos_list:
   deeplabcut.stitch_tracklets(
     config_path,
     [video],
