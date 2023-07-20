@@ -28,8 +28,8 @@ need to copy over:
 project_path = "D:\\paulazhu\\demo-me-2021-07-14\\"
 config_path = os.path.join(project_path, "config.yaml")
 
-videos_list = [project_path + "videos\\221209_PZ74_2.avi",\
-              project_path + "videos\\221209_PZ74_3.avi"]
+videos_list = [project_path + "videos\\221009_PZ74_2.avi",\
+              project_path + "videos\\221009_PZ74_3.avi"]
 
 SHUFFLE = 1
 TRACK_METHOD = "ellipse"  # Could also be "box", but "ellipse" was found to be more robust on this dataset.
