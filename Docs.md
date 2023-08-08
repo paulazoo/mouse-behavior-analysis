@@ -37,7 +37,7 @@ _slanted = timing_
 - some of the python scripts already have parallel coded in, so can edit depending on # of cores
 - __./run_dlc_multianimal.ipynb__ is slow, but you can make several gmails and copies of this in Google Colab, then run all videos at same time
 - __dlc_tracklets/make_tracklets.py__ I decided to take raw pose estimation pickle data prior to any stitching/filtering/p-value dropping for classifier features, so technically don't need to run anything past dlc's _convert_detections2tracklets_ step, but the rest of dlc's workflow is still needed if wanted to make dlc's full, filtered, stitched detections video
-- __./run_dlc_multianimal.ipynb__: do not use deeplabcut's use_shelve=False option, since the .pickle.db files have some weird errors when making tracklets if this is used. Just find better RAM
+- __./run_dlc_multianimal.ipynb__: do not use deeplabcut's use_shelve=True option, since the .pickle.db files have some weird errors when making tracklets if this is used. Just find better RAM
 
 ## Other notes:
 __Mount vs Intromission__:
