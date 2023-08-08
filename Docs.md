@@ -1,8 +1,8 @@
 # General:
 Run through deeplabcut model --> Calculate features from bodyparts --> Run through classifier to find putative mounts
-__bold = to run (from this directory)__
-_slanted = timing_
-`code format = a file or something in model directory`
+* __bold = to run (from this directory)__
+* _slanted = timing_
+* `code format = a file or something in model directory`
 
 # 1) Local Video Editing:
 - __video_cropping/get_area.m__: _(1m)_ Select female-only side area of the cage, name as '[video_name]_female_side' in the gui. Outputs `[video_name]_female_side.mat` which is needed for one of the classifier features.
@@ -44,13 +44,12 @@ __Mount vs Intromission__:
 So far, unable to make a classifier to accurately detect mount vs intromission, but this might be possible if temporal data (n frame features ahead or before in time) could be included; however, this many features/dimensions would require a lot more training frames
 
 __General workflow for other behaviors__:
-Train from current deeplabcut snapshot, change SNAPSHOT number and iteration in dlc settings and throughout code
-Run a new pca on different bodypart angles/distances/areas for mice to be in
-Then make a new SMOTE or otherwise imbalance-adjusted (because 1/100 frames will be the behavior) rfc on the most predictive features.
+1. Train from current deeplabcut snapshot, change SNAPSHOT number and iteration in dlc settings and throughout code
+2. Run a new pca on different bodypart angles/distances/areas for mice to be in
+3. Then make a new SMOTE or otherwise imbalance-adjusted (because 1/100 frames will be the behavior) rfc on the most predictive features.
 
 __Amount of training data__:
-In total, ~300 accumulated training frames to go from the open-field 3 mouse demo model (publicly available) to this most recent version
-However, also worked fine back when only trained with 50 frames
+In total, ~300 accumulated training frames to go from the open-field 3 mouse demo model (publicly available) to this most recent version. However, also worked fine back when only trained with 50 frames
 
 __Constants used__:
 - 36000 frames (20m videos)
