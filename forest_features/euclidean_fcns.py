@@ -56,7 +56,7 @@ def euclid_angle(acoor, bcoor, ccoor):
   return output_ang
 
 
-# BODYPART IN AREA FUNCTIONS
+# BODYPART IN AREA FUNCTIONS----------------------------------------
 def torso_in_area(area_vector, feature_pts, i):
   # finds if any part of torso at all is in area
 

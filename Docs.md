@@ -29,6 +29,7 @@ _slanted = timing_
 
 
 # Troubleshooting:
+- Uses DLC 2.3.5
 - Try not to include human hands
 - Try to crop video to exclude walls as much as possible, since plastic reflections of mice sometimes also confuse deeplabcut
 - If a mouse manages to climb up onto wall ledge out of camera and/or jump and hang off edge, classifier will think it's a mount because will think 2nd mouse is under 1st mouse
@@ -36,14 +37,14 @@ _slanted = timing_
 - some of the python scripts already have parallel coded in, so can edit depending on # of cores
 - __./run_dlc_multianimal.ipynb__ is slow, but you can make several gmails and copies of this in Google Colab, then run all videos at same time
 - __dlc_tracklets/make_tracklets.py__ I decided to take raw pose estimation pickle data prior to any stitching/filtering/p-value dropping for classifier features, so technically don't need to run anything past dlc's _convert_detections2tracklets_ step, but the rest of dlc's workflow is still needed if wanted to make dlc's full, filtered, stitched detections video
-
+- __./run_dlc_multianimal.ipynb__: do not use deeplabcut's use_shelve=False option, since the .pickle.db files have some weird errors when making tracklets if this is used. Just find better RAM
 
 ## Other notes:
 __Mount vs Intromission__:
 So far, unable to make a classifier to accurately detect mount vs intromission, but this might be possible if temporal data (n frame features ahead or before in time) could be included; however, this many features/dimensions would require a lot more training frames
 
-__Workflow for other behaviors__:
-Train from current deeplabcut snapshot
+__General workflow for other behaviors__:
+Train from current deeplabcut snapshot, change SNAPSHOT number and iteration in dlc settings and throughout code
 Run a new pca on different bodypart angles/distances/areas for mice to be in
 Then make a new SMOTE or otherwise imbalance-adjusted (because 1/100 frames will be the behavior) rfc on the most predictive features.
 

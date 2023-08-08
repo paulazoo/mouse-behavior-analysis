@@ -11,6 +11,10 @@ import os
 
 from multiprocessing import Process # Intel Xeon Gold 6138 @2.00GHz has 20 cores and 40 threads
 
+'''
+Create deeplabcut videos with all detections
+Change project_path, and todo_list as needed 
+'''
 
 def run_me(video, config_path, SHUFFLE):
     deeplabcut.create_video_with_all_detections(
@@ -24,21 +28,15 @@ def run_me(video, config_path, SHUFFLE):
 
 if __name__ == '__main__':
 
-    project_path = "D:\\paulazhu\\demo-me-2021-07-14\\"
+    project_path = "D:\\example\\demo-me-2021-07-14\\"
     config_path = os.path.join(project_path, "config.yaml")
+    todo_list = ["221209_PZ70_1"]
 
     SHUFFLE = 1
     TRACK_METHOD = "ellipse"  # Could also be "box", but "ellipse" was found to be more robust on this dataset.
 
     SNAPSHOT = 4 # not the actual number, but its index within the folder starting from 0
     edit_config(config_path, {'snapshotindex': SNAPSHOT})
-
-    todo_list = ["221209_PZ70_1", \
-                    "221209_PZ71_1", \
-                    "221209_PZ87_1", \
-                    "221209_PZ88_1", \
-                    "221209_PZ89_1", \
-                    "221209_PZ90_1"]
 
     process_list = []
     for todo in todo_list:
