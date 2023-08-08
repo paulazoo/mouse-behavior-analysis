@@ -12,35 +12,6 @@ import os
 from multiprocessing import Process # Intel Xeon Gold 6138 @2.00GHz has 20 cores and 40 threads
 
 
-'''
-    todo_list = ["221002_PZ71_1", \
-                    "221127_PZ89_1", \
-                    "221009_PZ70_1", \
-                    "221009_PZ71_1", \
-                    "221016_PZ70_1", \
-                    "221016_PZ71_1", \
-                    "221024_PZ70_1", \
-                    "221024_PZ71_1", \
-                    "221106_PZ70_1", \
-                    "221106_PZ71_1", \
-                    "221113_PZ87_1", \
-                    "221113_PZ89_1", \
-                    "221113_PZ90_1", \
-                    "221119_PZ70_1", \
-                    "221119_PZ71_1", \
-                    "221120_PZ87_1", \
-                    "221120_PZ89_1", \
-                    "221120_PZ90_1", \
-                    "221127_PZ87_1", \
-                    "221127_PZ90_1", \
-                    "221127_PZ70_1", \
-                    "221127_PZ71_1", \
-                    "221009_PZ70_1", \
-                    "221127_PZ89"
-                    ]
-    '''
-
-
 def run_me(video, config_path, SHUFFLE):
     deeplabcut.create_video_with_all_detections(
         config_path,
